@@ -7,7 +7,7 @@ function User({user}){
         </div>
     )
 }
-function UserList(users){
+function UserList({users}){
     return( 
         <div>
             {
@@ -16,6 +16,6 @@ function UserList(users){
                 )
             }
         </div>
-    )
+    );
 }
 export default UserList;
