@@ -1,0 +1,115 @@
+ ---------------------------------------------------------------------------
+ 03. 나의 첫번째 리액트 컴포넌트
+ < >
+        <Hello/>
+        <div style={style}>{name}</div> //변수는 괄호로 표시해주어야한다.
+        <div className="gray-box"></div> //class가 아닌 className으로 등록해주어야함
+    </>  //두개 이상의 태그는 감싸져있어야 한다.
+
+    주석 방법 {/**/} or //
+---------------------------------------------------------------------------
+05. props를 통해 컴포넌트에게 값 전달하기
+
+props 개념, Children 개념
+
+props 사용방법 
+<Hello color="red" name="joon"/>
+방법1
+function Hello(props){
+    <div style ={{color:props.color}}>{props.name}</div>   //style 태그에는 {{}} 두번 사용
+}
+방법2
+function Hello({name, color}){
+    <div style ={{color}}>{name}</div> 
+}
+
+props 기본값 설정 방법
+Hello.defaultProps={
+    name:'이름없음'
+};
+
+
+Children 사용방법
+다른 컴포넌트 안에 컴포넌트를 사용할 때 쓰임
+
+function Wrapper({children}){   //children 변수명으로 받아서 사용 다른 변수 명은 x
+    const style={
+        border:'2px solid black',
+        padding:16
+    };
+    return <div style={style}>{children}</div>
+}
+
+
+ <Wrapper>
+        <Hello name="react" color="red"/>     //Children을 사용하지 않는 경우 보이지 않음
+        <Hello  color="pink"/>
+    </Wrapper>
+
+---------------------------------------------------------------------------
+06. 조건부 랜더링
+  {
+        //isSpecial ? <b>*</b>:null 방법 1
+        isSpecial && <b>*</b>
+}
+다음 과 같이 변수명을 입력받아서 조건식을 만들 수 있음
+---------------------------------------------------------------------------
+07. useState를 통해 컴포넌트에서 바뀌는 값 관리하기
+카운트 만들기
+App.js에서 Counter.js 컴포넌트 호출 하도록 구현
+import React, {useState} from 'react'; 코드를 통해 React에서 useState를 불러오기
+
+const [number, setNumber]=useState(0); 비구조 할당으로 값 가져오기 0은 현재 값 
+setNumber(다음 값 ,또는 함수)
+const onIncrease=()=>{setNumber(prevNumber=> prevNumber+1)}  number 값이 클릭할 수록 상승하게 설정
+<button onClick={onIncrease}>+1</button> //호출
+---------------------------------------------------------------------------
+08. input 상태 관리하기
+input 태그를 생성하여 값입력에 따라 변화는 화면 구현 +초기화 기능 구현
+
+const [text, setText]=useState(''); 07.번 처럼 useState 를 사용
+ const onChange=(e)=>{      //e는  Dom 객체의 특성으로 변화에 따른 내용을 가지고 있음
+            setText(e.target.value) //이벤트가 발생한 곳에서의 value 값 
+    }
+    const onReset=() =>{
+        setText('');
+    }
+두개의 이벤트 생성
+
+<input onChange={onChange} value={text}/>
+            <button onClick={onReset}>초기화</button>
+            <div>
+                <b>값 :</b>
+                {text}
+            </div>
+다음과 같이 사용 
+---------------------------------------------------------------------------
+09. 여러개의  input 상태 관리하기
+두개의 input 관리
+
+  const [inputs, setInputs]=useState({
+        name:'',
+        nickname:''
+    });  다음 과 같은 선언을 통해 inputs가 name과 nickname을 가지도록 설정
+
+    const {name, nickname}=inputs;  //비구조 할당으로 분리
+
+ const onChange=(e)=>{
+        const {name, value}=e.target;   변화 감지시 target에서 name과 value 값 가져오기
+            setInputs({     //나중에 다시 보기  //
+                ...inputs,  //spread 문법  inputs객체를 가져와서 입력
+                [name]:value,
+            });
+    }
+---------------------------------------------------------------------------
+10.useRef로 특정 DOM 선택하기
+React에서 useRef를 가져와서 사용
+
+import React ,{useState, useRef}from 'react'; //useRef가져오기
+
+  const nameInput=useRef();   //변수 지정
+
+<input name="name" placeholder="이름"  onChange={onChange} value={name} ref={nameInput}/>
+ref로 매칭
+ nameInput.current.focus(); //current로 DOM객체에 접근 후 사용
+---------------------------------------------------------------------------
