@@ -145,3 +145,47 @@ function User({user}){
             )
         }
     </div>
+
+---------------------------------------------------------------------------
+12. useRef로 useRef로 컴포넌트 안의 변수 만들기
+UserList.js에서 Users를 App.js로 이동하고 props로 넘겨줌
+function App() {
+  const users=[
+    {
+        id:1,
+        username:'joon',
+        email:'public.joon@naver.com'
+    },
+      {
+        id:2,
+        username:'hello',
+        email:'public.hello@naver.com'
+    },
+    {
+        id:3,
+        username:'test',
+        email:'public.test@naver.com'
+    },
+];
+
+  const nextId=userRef(4);
+  const onCreate=()=>{
+      console.log(nextId.current);
+      nextId.current+=1;
+  }
+  return (
+      <UserList users={users}/>
+    );
+}
+---------------------------------------------------------------------------
+13.배열에 항목 추가하기
+useState를 사용하여 변화값 관리
+
+기본 구조를 컴포넌트를 활용하여 리팩토링 
+---------------------------------------------------------------------------
+14.배열에 항목 제거하기 
+onRemove 함수 구현
+---------------------------------------------------------------------------
+15.배열에 항목 수정하기
+onToggle 함수 구현
+---------------------------------------------------------------------------

@@ -19,17 +19,20 @@ function App() {
     {
         id:1,
         username:'joon',
-        email:'public.joon@naver.com'
+        email:'public.joon@naver.com',
+        active: true
     },
       {
         id:2,
         username:'hello',
-        email:'public.hello@naver.com'
+        email:'public.hello@naver.com',
+        active: false
     },
     {
         id:3,
         username:'test',
-        email:'public.test@naver.com'
+        email:'public.test@naver.com',
+        active: false
     },
 ]);
 
@@ -50,10 +53,26 @@ function App() {
       console.log(nextId.current);
       nextId.current+=1;
   }
+  const onRemove=id =>{
+    setUsers(users.filter(user=>user.id!==id));
+  };
+  const onToggle=id=>{
+      setUsers(
+        users.map(
+          user=>user.id===id
+          ?{...user, active:!user.active}
+          :user
+      ));
+  };
+  
   return (
     <>
-      <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
-      <UserList users={users}/>
+      <CreateUser 
+      username={username} 
+      email={email} 
+      onChange={onChange}
+      onCreate={onCreate} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
     </>
     );
 }
