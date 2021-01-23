@@ -113,3 +113,35 @@ import React ,{useState, useRef}from 'react'; //useRef가져오기
 ref로 매칭
  nameInput.current.focus(); //current로 DOM객체에 접근 후 사용
 ---------------------------------------------------------------------------
+12. 배열 랜더링하기
+배열에 있는 중복 값들을 호출할 때 반복되는 과정을 또 하나의 컴포넌트를 만들어서 사용
+
+<div>
+    <div>
+    <b>{users[0].username}</b><span>({users[0].email})</span>
+    </div>
+    <div>
+    <b>{users[0].username}</b><span>({users[0].email})</span>
+    </div>
+    <div>
+    <b>{users[0].username}</b><span>({users[0].email})</span>
+    </div>
+</div>
+
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+function User({user}){
+    return(
+        <div>
+                <b>{user.username}</b><span>({user.email})</span>
+        </div>
+    )
+}
+
+    <div>
+        {
+            users.map(
+                user=>(<User user={user} key={user.id}/>)
+            )
+        }
+    </div>
