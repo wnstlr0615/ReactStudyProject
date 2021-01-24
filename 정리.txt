@@ -235,3 +235,27 @@ export default React.memo(CreateUser);
  const onRemove=useCallback(id =>{
     setUsers(users=>users.filter(user=>user.id!==id)); // 기존 코드 ->setUsers(users.filter(user=>user.id!==id));
   },[]);
+---------------------------------------------------------------------------
+20.useReducer 기초
+(Counter.js)
+기존 useState를 useReducer로 변경
+
+function reducer(state, action){
+    switch(action.type){
+        case 'INCREMENT':
+            return state+1;
+        case  'DECREMENT':
+            return state-1;
+        default:
+            throw new Error('Unhandled action');
+    }
+}
+
+const [number, dispatch]=useReducer(reducer, 0);
+
+const onIncrease=()=>{
+    dispatch({
+        type:'INCREMENT'
+    });
+}
+---------------------------------------------------------------------------
