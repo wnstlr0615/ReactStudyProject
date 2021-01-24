@@ -217,3 +217,13 @@ const count=countActiveUsers(users); // 기존 코드 users 값이 변경되지 
 const count=useMemo(()=>countActiveUsers(users), [users]);  // 바뀐 코드 users 값이 변경 될 경우에만 호출된다.
 리엑트에 경우 값이 변경될 때마다 리랜더링되는데 값이 변경될 때만 변경하도록 useMemo를 사용해준다.
 ---------------------------------------------------------------------------
+18.useCallback를 사용하여 함수 재사용하기
+기존 구현된 onCreate, onRemove, onToggle, 등 기존 함수과 계속 생성되서 사용되기때문에 값이 변할 때만 호출되도록
+userCallback함수를 사용
+
+예시
+ const onRemove=useCallback(id =>{
+    setUsers(users.filter(user=>user.id!==id));
+  },[users]);
+---------------------------------------------------------------------------
+
