@@ -295,3 +295,7 @@ return ( //사용
     </MyContext.Provider>
 )
 ---------------------------------------------------------------------------
+24. UserDispatch Context 만들기
+App.js에서 Context를 만들어서 UserList.js에서 바로 사용 하기
+
+export const UserDispatch=createContext(null); //선언
