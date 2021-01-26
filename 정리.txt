@@ -280,3 +280,18 @@ function useInputs(initialForm){
 };
 export default useInputs;
 ---------------------------------------------------------------------------
+23. Context API 만들기
+props를 계속 넘겨 주는 것은 구조상 비효율 적이므로 Context만들어서 외부에서
+사용할 수 있다.
+
+import React, {createContext, useContext, useState} from "react";
+
+const MyContext=createContext('defaultValue'); //선언부
+
+return ( //사용
+    <MyContext.Provider value={value?"GOOD":"BAD"}>
+        <GrandParent text="Good"/>
+        <button onClick={()=>setValue(!value)}>CLICK ME</button>
+    </MyContext.Provider>
+)
+---------------------------------------------------------------------------
